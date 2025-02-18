@@ -1,14 +1,18 @@
 <?php
+require_once __DIR__ . '/../../core/Controller.php';
 require_once __DIR__ . '/../models/User.php';
 
-class UserController {
+class UserController extends Controller {
     public function register() {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $user = new User();
             $user->register($_POST['name'], $_POST['email'], $_POST['password']);
             header("Location: /login");
+        } else {
+            $this->render('register');
         }
     }
+    
 
     public function login() {
         session_start();
@@ -21,6 +25,8 @@ class UserController {
             } else {
                 echo "Identifiants incorrects";
             }
+        } else {
+            $this->render('login');
         }
     }
 

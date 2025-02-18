@@ -22,5 +22,10 @@ class Task extends Model {
         $stmt = $this->pdo->prepare("DELETE FROM tasks WHERE id = ?");
         return $stmt->execute([$id]);
     }
+
+    public function updateTaskStatus($id, $status) {
+        $stmt = $this->pdo->prepare("UPDATE tasks SET status = ? WHERE id = ?");
+        return $stmt->execute([$status, $id]);
+    }    
 }
 ?>
